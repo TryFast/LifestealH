@@ -1,75 +1,89 @@
-[17:17:00] [ServerMain/INFO]: [bootstrap] Running Java 22 (Java HotSpot(TM) 64-Bit Server VM 22.0.2+9-70; Oracle Corporation null) on Windows 11 10.0 (amd64)
-[17:17:01] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21-130-master@b1b5d4c (2024-08-10T10:02:42Z) for Minecraft 1.21
-[17:17:05] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
-[17:17:07] [ServerMain/INFO]: [PluginInitializerManager] Initialized 2 plugins
-[17:17:07] [ServerMain/INFO]: [PluginInitializerManager] Bukkit plugins (2):
+[21:21:59] [ServerMain/INFO]: [bootstrap] Running Java 22 (Java HotSpot(TM) 64-Bit Server VM 22.0.2+9-70; Oracle Corporation null) on Windows 11 10.0 (amd64)
+[21:21:59] [ServerMain/INFO]: [bootstrap] Loading Paper 1.21-130-master@b1b5d4c (2024-08-10T10:02:42Z) for Minecraft 1.21
+[21:22:06] [ServerMain/INFO]: [PluginInitializerManager] Initializing plugins...
+[21:22:09] [Paper Plugin Remapper Thread - 1/INFO]: [PluginRemapper] Remapping plugin 'C:\Users\ALI KHAN\Desktop\PLUGIN PROJECTS\LifestealH\build\libs\LifestealH-1.0-SNAPSHOT.jar'...
+[21:22:12] [Paper Plugin Remapper Thread - 1/INFO]: [PluginRemapper] Done remapping plugin 'C:\Users\ALI KHAN\Desktop\PLUGIN PROJECTS\LifestealH\build\libs\LifestealH-1.0-SNAPSHOT.jar' in 2277ms.
+[21:22:12] [ServerMain/INFO]: [PluginInitializerManager] Initialized 2 plugins
+[21:22:12] [ServerMain/INFO]: [PluginInitializerManager] Bukkit plugins (2):
  - LifestealH (1.0-SNAPSHOT), ViaVersion (5.3.1)
-[17:17:31] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
-[17:17:32] [ServerMain/INFO]: Found new data pack file/bukkit, loading it automatically
-[17:17:32] [ServerMain/INFO]: Found new data pack paper, loading it automatically
-[17:17:36] [ServerMain/INFO]: No existing world data, creating new world
-[17:17:45] [ServerMain/INFO]: Loaded 1290 recipes
-[17:17:46] [ServerMain/INFO]: Loaded 1399 advancements
-[17:17:47] [Server thread/INFO]: Starting minecraft server version 1.21
-[17:17:47] [Server thread/INFO]: Loading properties
-[17:17:47] [Server thread/INFO]: This server is running Paper version 1.21-130-master@b1b5d4c (2024-08-10T10:02:42Z) (Implementing API version 1.21-R0.1-SNAPSHOT)
-[17:17:49] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
-[17:17:49] [Server thread/INFO]: Server Ping Player Sample Count: 12
-[17:17:49] [Server thread/INFO]: Using 4 threads for Netty based IO
-[17:17:50] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using 1 I/O threads, 1 worker threads, and population gen parallelism of 1 threads
-[17:17:51] [Server thread/INFO]: Default game type: SURVIVAL
-[17:17:51] [Server thread/INFO]: Generating keypair
-[17:17:51] [Server thread/INFO]: Starting Minecraft server on *:25565
-[17:17:51] [Server thread/INFO]: Using default channel type
-[17:17:51] [Server thread/INFO]: Paper: Using Java compression from Velocity.
-[17:17:51] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
-[17:17:53] [Server thread/INFO]: [LifestealH] Loading server plugin LifestealH v1.0-SNAPSHOT
-[17:17:53] [Server thread/INFO]: [ViaVersion] Loading server plugin ViaVersion v5.3.1
-[17:17:53] [Server thread/INFO]: [ViaVersion] ViaVersion 5.3.1 is now loaded. Registering protocol transformers and injecting...
-[17:17:57] [Via-Mappingloader-0/INFO]: [ViaVersion] Loading block connection mappings ...
-[17:17:58] [Via-Mappingloader-0/INFO]: [ViaVersion] Using FastUtil Long2ObjectOpenHashMap for block connections
-[17:17:59] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
-[17:17:59] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
-[17:17:59] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
-[17:17:59] [Server thread/WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
-[17:17:59] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
-[17:17:59] [Server thread/INFO]: Preparing level "world"
-[17:19:09] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
-[17:19:18] [Server thread/INFO]: Time elapsed: 9484 ms
-[17:19:18] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
-[17:19:24] [Server thread/INFO]: Time elapsed: 6037 ms
-[17:19:24] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
-[17:19:26] [Server thread/INFO]: Time elapsed: 1895 ms
-[17:19:26] [Server thread/INFO]: [LifestealH] Enabling LifestealH v1.0-SNAPSHOT
-[17:19:26] [Server thread/INFO]: [LifestealH] LifestealH has been enabled!
-[17:19:26] [Server thread/INFO]: [ViaVersion] Enabling ViaVersion v5.3.1
-[17:19:26] [Server thread/INFO]: [ViaVersion] ViaVersion detected server version: 1.21-1.21.1 (767)
-[17:19:27] [Server thread/INFO]: [spark] Starting background profiler...
-[17:19:27] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in Java engine will be used instead.
-[17:19:27] [Server thread/INFO]: Done preparing level "world" (87.850s)
-[17:19:27] [Server thread/INFO]: Running delayed init tasks
-[17:19:27] [Server thread/INFO]: Done (150.710s)! For help, type "help"
-[17:19:27] [Server thread/INFO]: Timings Reset
-[17:19:27] [Craft Scheduler Thread - 5 - ViaVersion/INFO]: [ViaVersion] Finished mapping loading, shutting down loader executor.
-[17:19:42] [User Authenticator #0/INFO]: UUID of player Tryfastv16 is a4832582-fc13-3da9-a384-9e7225616aa1
-[17:19:47] [Server thread/INFO]: Tryfastv16 joined the game
-[17:19:47] [Server thread/INFO]: Tryfastv16[/127.0.0.1:52903] logged in with entity id 25 at ([world]-26.5, 66.0, 276.5)
-[17:20:37] [Server thread/INFO]: Made Tryfastv16 a server operator
-[17:20:50] [Server thread/INFO]: Tryfastv16 issued server command: /kill Tryfastv16
-[17:20:50] [Server thread/INFO]: Tryfastv16 was killed
-[17:20:50] [Server thread/INFO]: [Tryfastv16: Killed Tryfastv16]
-[17:20:57] [Server thread/INFO]: Tryfastv16 issued server command: /kill Tryfastv16
-[17:20:57] [Server thread/INFO]: Tryfastv16 was killed
-[17:20:57] [Server thread/INFO]: [Tryfastv16: Killed Tryfastv16]
-[17:21:03] [Server thread/INFO]: Tryfastv16 issued server command: /kill Tryfastv16
-[17:21:03] [Server thread/INFO]: Tryfastv16 was killed
-[17:21:03] [Server thread/INFO]: [Tryfastv16: Killed Tryfastv16]
-[17:21:07] [Server thread/INFO]: Tryfastv16 issued server command: /kill Tryfastv16
-[17:21:07] [Server thread/INFO]: Tryfastv16 was killed
-[17:21:07] [Server thread/INFO]: [Tryfastv16: Killed Tryfastv16]
-[17:21:13] [Server thread/INFO]: Tryfastv16 issued server command: /kill Tryfastv16
-[17:21:13] [Server thread/INFO]: Tryfastv16 was killed
-[17:21:13] [Server thread/INFO]: [Tryfastv16: Killed Tryfastv16]
-[17:21:19] [Server thread/INFO]: Tryfastv16 issued server command: /kill Tryfastv16
-[17:21:19] [Server thread/INFO]: Tryfastv16 was killed
-[17:21:19] [Server thread/INFO]: [Tryfastv16: Killed Tryfastv16]
+[21:22:47] [ServerMain/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, name=PROD]
+[21:23:00] [ServerMain/INFO]: Loaded 1290 recipes
+[21:23:02] [ServerMain/INFO]: Loaded 1399 advancements
+[21:23:02] [Server thread/INFO]: Starting minecraft server version 1.21
+[21:23:02] [Server thread/INFO]: Loading properties
+[21:23:02] [Server thread/INFO]: This server is running Paper version 1.21-130-master@b1b5d4c (2024-08-10T10:02:42Z) (Implementing API version 1.21-R0.1-SNAPSHOT)
+[21:23:04] [Server thread/INFO]: [spark] This server bundles the spark profiler. For more information please visit https://docs.papermc.io/paper/profiling
+[21:23:04] [Server thread/INFO]: Using 4 threads for Netty based IO
+[21:23:04] [Server thread/INFO]: Server Ping Player Sample Count: 12
+[21:23:06] [Server thread/INFO]: [ChunkTaskScheduler] Chunk system is using 1 I/O threads, 1 worker threads, and population gen parallelism of 1 threads
+[21:23:06] [Server thread/INFO]: Default game type: SURVIVAL
+[21:23:06] [Server thread/INFO]: Generating keypair
+[21:23:07] [Server thread/INFO]: Starting Minecraft server on *:25565
+[21:23:07] [Server thread/INFO]: Using default channel type
+[21:23:07] [Server thread/INFO]: Paper: Using Java compression from Velocity.
+[21:23:07] [Server thread/INFO]: Paper: Using Java cipher from Velocity.
+[21:23:11] [Server thread/INFO]: [LifestealH] Loading server plugin LifestealH v1.0-SNAPSHOT
+[21:23:11] [Server thread/INFO]: [ViaVersion] Loading server plugin ViaVersion v5.3.1
+[21:23:11] [Server thread/INFO]: [ViaVersion] ViaVersion 5.3.1 is now loaded. Registering protocol transformers and injecting...
+[21:23:16] [Via-Mappingloader-0/INFO]: [ViaVersion] Loading block connection mappings ...
+[21:23:17] [Via-Mappingloader-0/INFO]: [ViaVersion] Using FastUtil Long2ObjectOpenHashMap for block connections
+[21:23:18] [Server thread/INFO]: Server permissions file permissions.yml is empty, ignoring it
+[21:23:18] [Server thread/WARN]: **** SERVER IS RUNNING IN OFFLINE/INSECURE MODE!
+[21:23:18] [Server thread/WARN]: The server will make no attempt to authenticate usernames. Beware.
+[21:23:18] [Server thread/WARN]: While this makes the game possible to play without internet access, it also opens up the ability for hackers to connect with any username they choose.
+[21:23:18] [Server thread/WARN]: To change this, set "online-mode" to "true" in the server.properties file.
+[21:23:18] [Server thread/INFO]: Preparing level "world"
+[21:23:19] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[21:23:22] [Server thread/INFO]: Time elapsed: 3021 ms
+[21:23:22] [Server thread/INFO]: Preparing start region for dimension minecraft:the_nether
+[21:23:22] [Server thread/INFO]: Time elapsed: 469 ms
+[21:23:22] [Server thread/INFO]: Preparing start region for dimension minecraft:the_end
+[21:23:23] [Server thread/INFO]: Time elapsed: 883 ms
+[21:23:23] [Server thread/INFO]: [LifestealH] Enabling LifestealH v1.0-SNAPSHOT
+[21:23:23] [Server thread/ERROR]: Error occurred while enabling LifestealH v1.0-SNAPSHOT (Is it up to date?)
+java.lang.NullPointerException: Cannot invoke "org.bukkit.command.PluginCommand.setExecutor(org.bukkit.command.CommandExecutor)" because the return value of "com.khan.lifestealH.LifestealH.getCommand(String)" is null
+	at LifestealH-1.0-SNAPSHOT-1744561329890.jar/com.khan.lifestealH.LifestealH.onEnable(LifestealH.java:58) ~[LifestealH-1.0-SNAPSHOT-1744561329890.jar:?]
+	at org.bukkit.plugin.java.JavaPlugin.setEnabled(JavaPlugin.java:288) ~[paper-api-1.21-R0.1-SNAPSHOT.jar:?]
+	at io.papermc.paper.plugin.manager.PaperPluginInstanceManager.enablePlugin(PaperPluginInstanceManager.java:202) ~[paper-1.21.jar:1.21-130-b1b5d4c]
+	at io.papermc.paper.plugin.manager.PaperPluginManagerImpl.enablePlugin(PaperPluginManagerImpl.java:109) ~[paper-1.21.jar:1.21-130-b1b5d4c]
+	at org.bukkit.plugin.SimplePluginManager.enablePlugin(SimplePluginManager.java:520) ~[paper-api-1.21-R0.1-SNAPSHOT.jar:?]
+	at org.bukkit.craftbukkit.CraftServer.enablePlugin(CraftServer.java:640) ~[paper-1.21.jar:1.21-130-b1b5d4c]
+	at org.bukkit.craftbukkit.CraftServer.enablePlugins(CraftServer.java:589) ~[paper-1.21.jar:1.21-130-b1b5d4c]
+	at net.minecraft.server.MinecraftServer.loadWorld0(MinecraftServer.java:754) ~[paper-1.21.jar:1.21-130-b1b5d4c]
+	at net.minecraft.server.MinecraftServer.loadLevel(MinecraftServer.java:516) ~[paper-1.21.jar:1.21-130-b1b5d4c]
+	at net.minecraft.server.dedicated.DedicatedServer.initServer(DedicatedServer.java:329) ~[paper-1.21.jar:1.21-130-b1b5d4c]
+	at net.minecraft.server.MinecraftServer.runServer(MinecraftServer.java:1215) ~[paper-1.21.jar:1.21-130-b1b5d4c]
+	at net.minecraft.server.MinecraftServer.lambda$spin$0(MinecraftServer.java:330) ~[paper-1.21.jar:1.21-130-b1b5d4c]
+	at java.base/java.lang.Thread.run(Thread.java:1570) ~[?:?]
+[21:23:23] [Server thread/INFO]: [LifestealH] Disabling LifestealH v1.0-SNAPSHOT
+[21:23:23] [Server thread/INFO]: [LifestealH] LifestealH has been disabled!
+[21:23:23] [Server thread/INFO]: [ViaVersion] Enabling ViaVersion v5.3.1
+[21:23:23] [Server thread/INFO]: [ViaVersion] ViaVersion detected server version: 1.21-1.21.1 (767)
+[21:23:23] [Server thread/INFO]: [spark] Starting background profiler...
+[21:23:24] [Server thread/INFO]: [spark] The async-profiler engine is not supported for your os/arch (windows11/amd64), so the built-in Java engine will be used instead.
+[21:23:24] [Server thread/INFO]: Done preparing level "world" (5.977s)
+[21:23:24] [Server thread/INFO]: Running delayed init tasks
+[21:23:24] [Server thread/INFO]: Done (90.261s)! For help, type "help"
+[21:23:24] [Server thread/INFO]: Timings Reset
+[21:23:24] [Craft Scheduler Thread - 2 - ViaVersion/INFO]: [ViaVersion] Finished mapping loading, shutting down loader executor.
+[21:23:24] [Server thread/WARN]: [ViaVersion] There is a newer plugin version available: 5.3.2, you're on: 5.3.1
+[21:23:40] [User Authenticator #0/INFO]: UUID of player Tryfastv16 is a4832582-fc13-3da9-a384-9e7225616aa1
+[21:23:42] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 3000ms or 60 ticks behind
+[21:23:45] [Server thread/INFO]: Tryfastv16 joined the game
+[21:23:46] [Server thread/INFO]: Tryfastv16[/127.0.0.1:54506] logged in with entity id 41 at ([world]-0.5, 84.0, -6.5)
+[21:24:06] [Server thread/INFO]: Tryfastv16 issued server command: /addheart
+[21:24:08] [Server thread/INFO]: Tryfastv16 issued server command: /addhearts
+[21:24:32] [Server thread/INFO]: Tryfastv16 lost connection: Disconnected
+[21:24:32] [Server thread/INFO]: Tryfastv16 left the game
+[21:24:35] [User Authenticator #0/INFO]: UUID of player Tryfastv16 is a4832582-fc13-3da9-a384-9e7225616aa1
+[21:24:38] [Server thread/INFO]: Tryfastv16 joined the game
+[21:24:38] [Server thread/INFO]: Tryfastv16[/127.0.0.1:54570] logged in with entity id 134 at ([world]-7.525477997587567, 77.0, 2.8244998145801756)
+[21:24:48] [Server thread/WARN]: Can't keep up! Is the server overloaded? Running 2590ms or 51 ticks behind
+[21:25:26] [Server thread/INFO]: Tryfastv16 issued server command: /gamemode creative
+[21:25:26] [Server thread/INFO]: [Tryfastv16: Set own game mode to Creative Mode]
+[21:26:05] [Async Chat Thread - #1/INFO]: [Not Secure] <Tryfastv16> e
+[21:26:08] [Async Chat Thread - #1/INFO]: [Not Secure] <Tryfastv16> lol
+[21:26:15] [Async Chat Thread - #1/INFO]: [Not Secure] <Tryfastv16> fries
+[21:26:21] [Async Chat Thread - #1/INFO]: [Not Secure] <Tryfastv16> nigger
+[21:26:40] [Server thread/INFO]: Tryfastv16 lost connection: Disconnected
+[21:26:40] [Server thread/INFO]: Tryfastv16 left the game

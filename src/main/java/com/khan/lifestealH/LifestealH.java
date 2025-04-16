@@ -2,6 +2,9 @@ package com.khan.lifestealH;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -22,15 +25,15 @@ public class LifestealH extends JavaPlugin implements Listener {
     private FileConfiguration playerData;
     private HashMap<UUID, Integer> playerKills = new HashMap<>();
 
-    private final double DEFAULT_HEALTH = 20.0; // 10 hearts (each heart is 2 health points)
-    private final double MIN_HEALTH = 14.0; // 7 hearts
-    private final double MAX_HEALTH = 40.0; // 20 hearts
-    private final int KILLS_PER_HEART = 5;
-    private final double HEART_VALUE = 2.0; // 1 heart = 2 health points
+    private final double DEFAULT_HEALTH = 20.0;
+    private final double MIN_HEALTH = 14.0;
+    private final double MAX_HEALTH = 40.0;
+    private final int KILLS_PER_HEART = 3;
+    private final double HEART_VALUE = 2.0;
+    private final double MINIMUM_STEALABLE_HEALTH = 14.0;
 
     @Override
     public void onEnable() {
-        // Create configuration files
         if (!getDataFolder().exists()) {
             getDataFolder().mkdir();
         }
@@ -47,10 +50,11 @@ public class LifestealH extends JavaPlugin implements Listener {
 
         playerData = YamlConfiguration.loadConfiguration(playerDataFile);
 
-        // Register events
         getServer().getPluginManager().registerEvents(this, this);
 
-        // Load player kills data
+        getCommand("addhearts").setExecutor(new AddHeartsCommand());
+        getCommand("removeheart").setExecutor(new RemoveHeartCommand());
+
         loadKillsData();
 
         getLogger().info("LifestealH has been enabled!");
@@ -58,7 +62,6 @@ public class LifestealH extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        // Save data on shutdown
         saveKillsData();
         getLogger().info("LifestealH has been disabled!");
     }
@@ -72,7 +75,6 @@ public class LifestealH extends JavaPlugin implements Listener {
             }
         }
 
-        // Load health data for online players
         for (Player player : Bukkit.getOnlinePlayers()) {
             double savedHealth = playerData.getDouble("health." + player.getUniqueId().toString(), DEFAULT_HEALTH);
             player.setMaxHealth(savedHealth);
@@ -80,12 +82,10 @@ public class LifestealH extends JavaPlugin implements Listener {
     }
 
     private void saveKillsData() {
-        // Save kills data
         for (UUID uuid : playerKills.keySet()) {
             playerData.set("kills." + uuid.toString(), playerKills.get(uuid));
         }
 
-        // Save health data for online players
         for (Player player : Bukkit.getOnlinePlayers()) {
             playerData.set("health." + player.getUniqueId().toString(), player.getMaxHealth());
         }
@@ -103,19 +103,16 @@ public class LifestealH extends JavaPlugin implements Listener {
         Player player = event.getPlayer();
         UUID playerUUID = player.getUniqueId();
 
-        // Initialize kills counter for new players
         if (!playerKills.containsKey(playerUUID)) {
             playerKills.put(playerUUID, 0);
         }
 
-        // Set player's max health from saved data or default
         double savedHealth = playerData.getDouble("health." + playerUUID.toString(), DEFAULT_HEALTH);
         player.setMaxHealth(savedHealth);
 
-        // Send welcome message with current stats
         Bukkit.getScheduler().runTaskLater(this, () -> {
             sendPlayerStats(player);
-        }, 20L); // Delay for 1 second
+        }, 20L);
     }
 
     @EventHandler
@@ -123,12 +120,25 @@ public class LifestealH extends JavaPlugin implements Listener {
         Player victim = event.getEntity();
         Player killer = victim.getKiller();
 
-        // Handle victim losing a heart
+        if (killer == null) {
+            return;
+        }
+
+        double victimHealth = victim.getMaxHealth();
+
+        getLogger().info("Victim " + victim.getName() + " has exact health value of: " + victimHealth);
+        getLogger().info("MINIMUM_STEALABLE_HEALTH constant is: " + MINIMUM_STEALABLE_HEALTH);
+
         reducePlayerHealth(victim);
 
-        // Handle killer getting a kill point (if killed by another player)
         if (killer != null && killer != victim) {
-            addKillPoint(killer);
+            if (victimHealth - MINIMUM_STEALABLE_HEALTH > 0.001) {
+                getLogger().info("Kill point awarded to " + killer.getName());
+                addKillPoint(killer);
+            } else {
+                getLogger().info("No kill point awarded - victim had 7 or fewer hearts");
+                killer.sendMessage(ChatColor.YELLOW + "No kill point awarded - player had 7 or fewer hearts.");
+            }
         }
     }
 
@@ -140,13 +150,19 @@ public class LifestealH extends JavaPlugin implements Listener {
         player.sendMessage(ChatColor.RED + "You lost a heart! Current max health: " +
                 ChatColor.GOLD + (newMaxHealth / 2) + " hearts");
 
-        // Save the new health value
         playerData.set("health." + player.getUniqueId().toString(), newMaxHealth);
         saveKillsData();
     }
 
     private void addKillPoint(Player player) {
         UUID playerUUID = player.getUniqueId();
+        double currentMaxHealth = player.getMaxHealth();
+
+        if (currentMaxHealth < DEFAULT_HEALTH) {
+            addPlayerHeart(player);
+            return;
+        }
+
         int currentKills = playerKills.getOrDefault(playerUUID, 0);
         currentKills++;
         playerKills.put(playerUUID, currentKills);
@@ -154,20 +170,17 @@ public class LifestealH extends JavaPlugin implements Listener {
         player.sendMessage(ChatColor.GREEN + "Kill point gained! Current points: " +
                 ChatColor.GOLD + currentKills + "/" + KILLS_PER_HEART);
 
-        // Check if player can earn a heart
         if (currentKills >= KILLS_PER_HEART) {
             addPlayerHeart(player);
             playerKills.put(playerUUID, currentKills - KILLS_PER_HEART);
         }
 
-        // Save the updated kills data
         saveKillsData();
     }
 
     private void addPlayerHeart(Player player) {
         double currentMaxHealth = player.getMaxHealth();
 
-        // Check if player has reached max health
         if (currentMaxHealth >= MAX_HEALTH) {
             player.sendMessage(ChatColor.YELLOW + "You've reached the maximum of 20 hearts!");
             return;
@@ -179,8 +192,8 @@ public class LifestealH extends JavaPlugin implements Listener {
         player.sendMessage(ChatColor.GREEN + "Congratulations! You earned a heart! Current max health: " +
                 ChatColor.GOLD + (newMaxHealth / 2) + " hearts");
 
-        // Save the new health value
         playerData.set("health." + player.getUniqueId().toString(), newMaxHealth);
+        saveKillsData();
     }
 
     private void sendPlayerStats(Player player) {
@@ -190,13 +203,106 @@ public class LifestealH extends JavaPlugin implements Listener {
 
         player.sendMessage(ChatColor.GOLD + "=== LifestealH Stats ===");
         player.sendMessage(ChatColor.YELLOW + "Max Health: " + ChatColor.WHITE + (maxHealth / 2) + " hearts");
-        player.sendMessage(ChatColor.YELLOW + "Kill Points: " + ChatColor.WHITE + kills + "/" + KILLS_PER_HEART);
 
-        if (maxHealth < MAX_HEALTH) {
+        if (maxHealth < DEFAULT_HEALTH) {
+            player.sendMessage(ChatColor.YELLOW + "Hearts Status: " + ChatColor.WHITE +
+                    "You need only 1 kill to gain a heart!");
+        } else if (maxHealth < MAX_HEALTH) {
+            player.sendMessage(ChatColor.YELLOW + "Kill Points: " + ChatColor.WHITE + kills + "/" + KILLS_PER_HEART);
             player.sendMessage(ChatColor.YELLOW + "Kills needed for next heart: " + ChatColor.WHITE +
                     (KILLS_PER_HEART - kills));
         } else {
             player.sendMessage(ChatColor.YELLOW + "You've reached the maximum of 20 hearts!");
+        }
+    }
+
+    private class AddHeartsCommand implements CommandExecutor {
+        @Override
+        public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+            if (!sender.hasPermission("lifestealh.admin")) {
+                sender.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
+                return true;
+            }
+
+            if (args.length < 2) {
+                sender.sendMessage(ChatColor.RED + "Usage: /addhearts <player> <amount>");
+                return true;
+            }
+
+            Player target = Bukkit.getPlayer(args[0]);
+            if (target == null) {
+                sender.sendMessage(ChatColor.RED + "Player not found or not online!");
+                return true;
+            }
+
+            int amount;
+            try {
+                amount = Integer.parseInt(args[1]);
+                if (amount <= 0) {
+                    sender.sendMessage(ChatColor.RED + "Please enter a positive number of hearts!");
+                    return true;
+                }
+            } catch (NumberFormatException e) {
+                sender.sendMessage(ChatColor.RED + "Please enter a valid number!");
+                return true;
+            }
+
+            double currentMaxHealth = target.getMaxHealth();
+            double newMaxHealth = Math.min(MAX_HEALTH, currentMaxHealth + (amount * HEART_VALUE));
+
+            target.setMaxHealth(newMaxHealth);
+            target.sendMessage(ChatColor.GREEN + "An admin has given you " + amount +
+                    " heart(s)! Current max health: " + ChatColor.GOLD + (newMaxHealth / 2) + " hearts");
+
+            playerData.set("health." + target.getUniqueId().toString(), newMaxHealth);
+            saveKillsData();
+
+            sender.sendMessage(ChatColor.GREEN + "Added " + amount + " heart(s) to " + target.getName() +
+                    "! Their current health is now " + (newMaxHealth / 2) + " hearts.");
+
+            return true;
+        }
+    }
+
+    private class RemoveHeartCommand implements CommandExecutor {
+        @Override
+        public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+            if (!sender.hasPermission("lifestealh.admin")) {
+                sender.sendMessage(ChatColor.RED + "You don't have permission to use this command!");
+                return true;
+            }
+
+            if (args.length < 1) {
+                sender.sendMessage(ChatColor.RED + "Usage: /removeheart <player>");
+                return true;
+            }
+
+            Player target = Bukkit.getPlayer(args[0]);
+            if (target == null) {
+                sender.sendMessage(ChatColor.RED + "Player not found or not online!");
+                return true;
+            }
+
+            double currentMaxHealth = target.getMaxHealth();
+
+            if (currentMaxHealth <= MIN_HEALTH) {
+                sender.sendMessage(ChatColor.RED + target.getName() + " is already at minimum health (7 hearts)!");
+                return true;
+            }
+
+            double newMaxHealth = Math.max(MIN_HEALTH, currentMaxHealth - HEART_VALUE);
+
+            target.setMaxHealth(newMaxHealth);
+            target.sendMessage(ChatColor.RED + "An admin has removed a heart! Current max health: " +
+                    ChatColor.GOLD + (newMaxHealth / 2) + " hearts");
+
+            playerData.set("health." + target.getUniqueId().toString(), newMaxHealth);
+            saveKillsData();
+
+            sender.sendMessage(ChatColor.GREEN + "Removed a heart from " + target.getName() +
+                    "! Their current health is now " + (newMaxHealth / 2) + " hearts.");
+
+            return true;
         }
     }
 }

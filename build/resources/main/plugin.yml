@@ -1,6 +1,15 @@
 name: LifestealH
-version: '1.0-SNAPSHOT'
+version: '1.3'
 main: com.khan.lifestealH.LifestealH
 api-version: '1.21'
 description: 'Lifestal Plugin For RebaneSMP'
 author: 'Tryfastv16'
+commands:
+  addhearts:
+    description: Adds hearts to a player
+    usage: /addhearts <player> <amount>
+    permission: lifestealh.admin
+  removeheart:
+    description: Removes a heart from a player
+    usage: /removeheart <player>
+    permission: lifestealh.admin
